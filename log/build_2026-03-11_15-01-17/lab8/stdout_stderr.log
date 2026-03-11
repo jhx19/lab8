@@ -1,0 +1,29 @@
+running develop
+running egg_info
+creating lab8.egg-info
+writing lab8.egg-info/PKG-INFO
+writing dependency_links to lab8.egg-info/dependency_links.txt
+writing entry points to lab8.egg-info/entry_points.txt
+writing requirements to lab8.egg-info/requires.txt
+writing top-level names to lab8.egg-info/top_level.txt
+writing manifest file 'lab8.egg-info/SOURCES.txt'
+reading manifest file 'lab8.egg-info/SOURCES.txt'
+writing manifest file 'lab8.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/ubuntu/turtlebot4_ws/src/lab8/install/lab8/lib/python3.10/site-packages/lab8.egg-link (link to .)
+Installing aruco_detector script to /home/ubuntu/turtlebot4_ws/src/lab8/install/lab8/lib/lab8
+Installing navigator script to /home/ubuntu/turtlebot4_ws/src/lab8/install/lab8/lib/lab8
+Installing orchestrator script to /home/ubuntu/turtlebot4_ws/src/lab8/install/lab8/lib/lab8
+Installing wall_follower script to /home/ubuntu/turtlebot4_ws/src/lab8/install/lab8/lib/lab8
+
+Installed /home/ubuntu/turtlebot4_ws/src/lab8/build/lab8
+running symlink_data
+creating /home/ubuntu/turtlebot4_ws/src/lab8/install/lab8/share/ament_index
+creating /home/ubuntu/turtlebot4_ws/src/lab8/install/lab8/share/ament_index/resource_index
+creating /home/ubuntu/turtlebot4_ws/src/lab8/install/lab8/share/ament_index/resource_index/packages
+symbolically linking /home/ubuntu/turtlebot4_ws/src/lab8/build/lab8/resource/lab8 -> /home/ubuntu/turtlebot4_ws/src/lab8/install/lab8/share/ament_index/resource_index/packages
+symbolically linking /home/ubuntu/turtlebot4_ws/src/lab8/build/lab8/package.xml -> /home/ubuntu/turtlebot4_ws/src/lab8/install/lab8/share/lab8
+creating /home/ubuntu/turtlebot4_ws/src/lab8/install/lab8/share/lab8/launch
+symbolically linking /home/ubuntu/turtlebot4_ws/src/lab8/build/lab8/launch/lab8.launch.py -> /home/ubuntu/turtlebot4_ws/src/lab8/install/lab8/share/lab8/launch
+creating /home/ubuntu/turtlebot4_ws/src/lab8/install/lab8/share/lab8/config
+symbolically linking /home/ubuntu/turtlebot4_ws/src/lab8/build/lab8/config/nav2.yaml -> /home/ubuntu/turtlebot4_ws/src/lab8/install/lab8/share/lab8/config

@@ -1,0 +1,6 @@
+[console_scripts]
+aruco_detector = lab8.aruco_detector:main
+navigator = lab8.navigator:main
+orchestrator = lab8.orchestrator:main
+wall_follower = lab8.wall_follower:main
+

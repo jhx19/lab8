@@ -1,0 +1,9 @@
+source;share/lab8/hook/pythonpath.ps1
+source;share/lab8/hook/pythonpath.dsv
+source;share/lab8/hook/pythonpath.sh
+source;share/lab8/hook/ament_prefix_path.ps1
+source;share/lab8/hook/ament_prefix_path.dsv
+source;share/lab8/hook/ament_prefix_path.sh
+source;../../build/lab8/share/lab8/hook/pythonpath_develop.ps1
+source;../../build/lab8/share/lab8/hook/pythonpath_develop.dsv
+source;../../build/lab8/share/lab8/hook/pythonpath_develop.sh
