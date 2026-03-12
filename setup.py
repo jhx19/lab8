@@ -16,8 +16,8 @@ setup(
         (os.path.join('share', package_name, 'launch'),
             glob('launch/*.launch.py')),
         # Install config files
-        (os.path.join('share', package_name, 'config'),
-            glob('config/*.yaml')),
+        # (os.path.join('share', package_name, 'config'),
+        #     glob('config/*.yaml')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -34,6 +34,7 @@ setup(
             'navigator       = lab8.navigator:main',
             # Central orchestrator (Phase 2)
             'orchestrator    = lab8.orchestrator:main',
+            'maze_solver = lab8.maze_solver:main',
         ],
     },
 )

@@ -325,6 +325,7 @@ class Orchestrator(Node):
         repeating-timer bug that would cause multiple RETURN_TO_DOCK transitions.
         """
         self.get_logger().info('[SAVE_AND_LABEL] Saving map and labelling ArUco.')
+        self._send_aruco_cmd('shutdown')   
         self._save_label_done = False   # guard: only execute once
         self._save_label_timer = self.create_timer(1.0, self._save_map_and_label)
 

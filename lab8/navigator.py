@@ -75,6 +75,18 @@ class Navigator(Node):
 
         self.get_logger().info(f'Navigator ready.  offset={GOAL_OFFSET_M} m')
 
+    # ── Nav2 server wait ──────────────────────────────────────────────────────
+    def _wait_for_nav2(self):
+        """
+        Block until Nav2 action server is available.
+        Retries every 5 s and logs progress so it's visible in the terminal.
+        Never times out — Nav2 will eventually become active during exploration.
+        """
+        self.get_logger().info('Waiting for Nav2 action server...')
+        while not self._nav_client.wait_for_server(timeout_sec=5.0):
+            self.get_logger().warn('Nav2 not ready yet, retrying...')
+        self.get_logger().info('Nav2 ready.')
+
     # ── Pose storage ─────────────────────────────────────────────────────────
     def _start_pose_cb(self, msg: PoseStamped):
         self.start_map_pose = msg
@@ -101,20 +113,12 @@ class Navigator(Node):
 
     # ── goto_start ───────────────────────────────────────────────────────────
     def _do_goto_start(self):
-        """
-        Navigate back to the recorded start pose using Nav2.
-        Uses the full Nav2 global planner + costmap for obstacle avoidance,
-        unlike the TurtleBot4 dock IR approach which is line-of-sight only.
-        """
         if self.start_map_pose is None:
             self.get_logger().error('No start pose stored — cannot navigate.')
             self._publish_status('failed')
             return
 
-        if not self._nav_client.wait_for_server(timeout_sec=10.0):
-            self.get_logger().error('Nav2 action server not available.')
-            self._publish_status('failed')
-            return
+        self._wait_for_nav2()
 
         goal_pose = PoseStamped()
         goal_pose.header.frame_id = 'map'
@@ -134,23 +138,12 @@ class Navigator(Node):
 
     # ── goto_aruco ───────────────────────────────────────────────────────────
     def _do_goto_aruco(self):
-        """
-        Navigate to GOAL_OFFSET_M in front of the ArUco marker.
-
-        The stored ArUco orientation encodes the robot's yaw AT MEASUREMENT
-        TIME — the direction pointing FROM the robot TOWARD the marker.
-        "In front of the marker" = back off GOAL_OFFSET_M along that yaw
-        so the robot stops just short of the marker, facing it.
-        """
         if self.aruco_map_pose is None:
             self.get_logger().error('No ArUco pose stored — cannot navigate.')
             self._publish_status('failed')
             return
 
-        if not self._nav_client.wait_for_server(timeout_sec=10.0):
-            self.get_logger().error('Nav2 action server not available.')
-            self._publish_status('failed')
-            return
+        self._wait_for_nav2()
 
         goal_pose = self._compute_aruco_goal(self.aruco_map_pose)
 
@@ -166,21 +159,6 @@ class Navigator(Node):
             lambda f: self._nav_goal_cb(f, success_status='at_goal'))
 
     def _compute_aruco_goal(self, aruco_pose: PoseStamped) -> PoseStamped:
-        """
-        Compute goal pose GOAL_OFFSET_M in front of the ArUco marker.
-
-        Orientation convention:
-          aruco_pose.orientation encodes the robot's approach yaw, i.e.
-          the angle pointing FROM start TOWARD marker. To place the goal
-          just in front of the marker, we step BACK along that direction.
-
-        Diagram (top view):
-          [start/dock]  ──approach_yaw──>  [ArUco marker]
-                                    [goal] ← GOAL_OFFSET_M ←
-
-          goal = marker − GOAL_OFFSET_M × (cos θ, sin θ)
-          robot faces θ at goal (already pointing at marker)
-        """
         mx = aruco_pose.pose.position.x
         my = aruco_pose.pose.position.y
 

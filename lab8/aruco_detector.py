@@ -205,6 +205,10 @@ class ArucoDetector(Node):
         elif cmd == 'reset':
             self.get_logger().info('Command: reset → returning to SCANNING.')
             self._reset()
+        elif cmd == 'shutdown':
+            self.get_logger().info('Command: shutdown → destroying node.')
+            self.destroy_node()
+            rclpy.shutdown()
 
     # ── Main image callback ───────────────────────────────────────────────────
     def _image_cb(self, msg: CompressedImage):
@@ -492,11 +496,11 @@ class ArucoDetector(Node):
         It uses the well-maintained SLAM TF and avoids any camera mounting
         calibration issues.
         """
-        for base_frame in ('base_footprint', 'base_link'):
+        for base_frame in ('base_link', 'base_footprint'):
             try:
                 tf = self.tf_buffer.lookup_transform(
                     MAP_FRAME, base_frame,
-                    rclpy.time.Time(),
+                    rclpy.time.Time(seconds=0, nanoseconds=0),  # latest, ignore clock mismatch
                     timeout=Duration(seconds=1.0)
                 )
                 x = tf.transform.translation.x

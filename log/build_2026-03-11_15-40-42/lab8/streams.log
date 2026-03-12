@@ -1,0 +1,20 @@
+[0.434s] Invoking command in '/home/ubuntu/turtlebot4_ws/src/lab8/build/lab8': PYTHONPATH=/home/ubuntu/turtlebot4_ws/src/lab8/build/lab8/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/ubuntu/turtlebot4_ws/src/lab8/install/lab8/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/ubuntu/turtlebot4_ws/src/lab8/build/lab8/build --no-deps symlink_data
+[0.611s] running develop
+[0.703s] running egg_info
+[0.703s] writing lab8.egg-info/PKG-INFO
+[0.703s] writing dependency_links to lab8.egg-info/dependency_links.txt
+[0.704s] writing entry points to lab8.egg-info/entry_points.txt
+[0.704s] writing requirements to lab8.egg-info/requires.txt
+[0.704s] writing top-level names to lab8.egg-info/top_level.txt
+[0.704s] reading manifest file 'lab8.egg-info/SOURCES.txt'
+[0.704s] writing manifest file 'lab8.egg-info/SOURCES.txt'
+[0.705s] running build_ext
+[0.705s] Creating /home/ubuntu/turtlebot4_ws/src/lab8/install/lab8/lib/python3.10/site-packages/lab8.egg-link (link to .)
+[0.706s] Installing aruco_detector script to /home/ubuntu/turtlebot4_ws/src/lab8/install/lab8/lib/lab8
+[0.706s] Installing navigator script to /home/ubuntu/turtlebot4_ws/src/lab8/install/lab8/lib/lab8
+[0.706s] Installing orchestrator script to /home/ubuntu/turtlebot4_ws/src/lab8/install/lab8/lib/lab8
+[0.706s] Installing wall_follower script to /home/ubuntu/turtlebot4_ws/src/lab8/install/lab8/lib/lab8
+[0.706s] 
+[0.706s] Installed /home/ubuntu/turtlebot4_ws/src/lab8/build/lab8
+[0.706s] running symlink_data
+[0.731s] Invoked command in '/home/ubuntu/turtlebot4_ws/src/lab8/build/lab8' returned '0': PYTHONPATH=/home/ubuntu/turtlebot4_ws/src/lab8/build/lab8/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/ubuntu/turtlebot4_ws/src/lab8/install/lab8/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/ubuntu/turtlebot4_ws/src/lab8/build/lab8/build --no-deps symlink_data

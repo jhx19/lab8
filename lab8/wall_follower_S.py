@@ -44,9 +44,9 @@ from std_msgs.msg import Bool, String
 
 # ── Tunable parameters ────────────────────────────────────────────────────────
 
-DESIRED_WALL_DIST = 0.37    # target distance to right wall (meters)
-WALL_LOST_DIST    = 0.7    # if right reading > this, wall is lost → reacquire
-FRONT_DANGER_DIST = 0.5    # if front reading < this, obstacle → turn left
+DESIRED_WALL_DIST = 0.22    # target distance to right wall (meters)
+WALL_LOST_DIST    = 0.5    # if right reading > this, wall is lost → reacquire
+FRONT_DANGER_DIST = 0.45    # if front reading < this, obstacle → turn left
 
 # PID gains  (tune on real robot — start with Kp only, then add Kd, then Ki)
 Kp = 1.2
@@ -55,13 +55,13 @@ Kd = 0.15
 
 INTEGRAL_MAX = 1.0          # anti-windup clamp on the integral term
 
-LINEAR_SPEED  = 0.46      # base forward speed (m/s)
-ANGULAR_MAX   = 1.5         # PID output clamped to ±this (rad/s)
-TURN_SPEED    = 1.0        # fixed turn rate for priority overrides (rad/s)
+LINEAR_SPEED  = 0.25      # base forward speed (m/s)
+ANGULAR_MAX   = 1.2         # PID output clamped to ±this (rad/s)
+TURN_SPEED    = 0.8        # fixed turn rate for priority overrides (rad/s)
 
 # Sector half-width as a fraction of total scan indices.
 # 0.07 → ±7% of n indices, which is roughly ±25° for a 360° LiDAR.
-SECTOR_HALF_FRAC = 0.07
+SECTOR_HALF_FRAC = 0.075
 
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -188,7 +188,7 @@ class WallFollower(Node):
 
         # ── Priority 2: right wall lost → turn right slowly to reacquire ─────
         elif right_dist > WALL_LOST_DIST:
-            twist.linear.x  = LINEAR_SPEED * 0.7 
+            twist.linear.x  = LINEAR_SPEED * 0.6 
             twist.angular.z = -TURN_SPEED * 0.7  # negative = CW = right
             self.get_logger().info(
                 f'[OVERRIDE] Wall lost ({right_dist:.2f} m) → reacquiring, s {twist.linear.x:.2f} m/s, w {twist.angular.z:.2f} rad/s',
@@ -208,7 +208,7 @@ class WallFollower(Node):
             # if the anglular correction is large, we can reduce the forward speed to make the turn smoother
             if abs(angular_z) > ANGULAR_MAX * 0.6:
                 # it depends on the angular_z, the larger the angular_z, the slower the forward speed, but it will not be less than 30% of the original speed
-                twist.linear.x = LINEAR_SPEED * max(0.3, 1 - abs(angular_z) / ANGULAR_MAX)
+                twist.linear.x = LINEAR_SPEED * max(0.2, 1 - abs(angular_z) / ANGULAR_MAX)
             else:
                 twist.linear.x = LINEAR_SPEED
             
