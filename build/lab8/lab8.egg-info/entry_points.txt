@@ -1,5 +1,6 @@
 [console_scripts]
 aruco_detector = lab8.aruco_detector:main
+maze_solver = lab8.maze_solver:main
 navigator = lab8.navigator:main
 orchestrator = lab8.orchestrator:main
 wall_follower = lab8.wall_follower:main

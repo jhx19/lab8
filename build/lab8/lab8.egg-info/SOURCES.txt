@@ -1,13 +1,13 @@
 package.xml
 setup.cfg
 setup.py
-config/nav2.yaml
 lab8/__init__.py
 lab8/aruco_detector.py
+lab8/maze_solver.py
 lab8/navigator.py
 lab8/orchestrator.py
 lab8/wall_follower.py
-lab8/wall_follower_L.py
+lab8/wall_follower_S.py
 lab8.egg-info/PKG-INFO
 lab8.egg-info/SOURCES.txt
 lab8.egg-info/dependency_links.txt
